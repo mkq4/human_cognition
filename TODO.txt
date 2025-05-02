@@ -1,0 +1,4 @@
+- Games cards (reaction time, sequence memory, aim trainer, number memory, verbal memo, chimp test, visual memory, typing)
+- authorization (backend)
+- dashboard
+- user stats

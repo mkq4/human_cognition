@@ -1,0 +1,9 @@
+.area__block {
+    width: 120px;
+    height: 120px;
+    background-color: #6399d6;
+    cursor: pointer;
+}
+.area__block:hover {
+    background-color: #6399d69a;
+}

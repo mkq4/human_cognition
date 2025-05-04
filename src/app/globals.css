@@ -29,3 +29,15 @@ html, body {
   height: 100%;
   transition: 0.2s;
 }
+
+.game__screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  gap: 20px;
+  background-color: #85b5ed;
+  height: 500px;
+  /* "flex flex-col items-center justify-center py-10 gap-5 bg-[#85b5ed] h-[500px]"; */
+}

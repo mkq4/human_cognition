@@ -72,7 +72,7 @@ export const NumberMemoryPage = ({ className }: Props) => {
 
 const StartScreen = ({ setScreen }: ScreenProps) => {
   return (
-    <div className={screenStyles}>
+    <div className={'game__screen'}>
       <h1 className="text-4xl font-bold">Number Memory Game</h1>
       <p className="text-2xl">Remember more numbers as you can</p>
 
@@ -110,9 +110,11 @@ const NumberScreen = ({ setScreen, setNumber, level, number }: ScreenProps) => {
   }, []);
 
   return (
-    <div className={screenStyles}>
+    <div className={"game__screen"}>
       <p className="text-2xl">remember this shit</p>
-      <p className="text-5xl select-none pointer-events-none font-bold">{number}</p>
+      <p className="text-5xl select-none pointer-events-none font-bold">
+        {number}
+      </p>
       <LineTimer time={timer} />
     </div>
   );
@@ -134,7 +136,7 @@ const InputScreen = ({ setScreen, setUserAnswer }: ScreenProps) => {
   if (!setUserAnswer) return null;
 
   return (
-    <div className={`${screenStyles}`}>
+    <div className={`game__screen`}>
       <Container className="flex flex-col items-center justify-center gap-5">
         <p className="text-3xl">Input all what you remember</p>
         <input
@@ -166,7 +168,7 @@ const ResultScreen = ({ setScreen, number, userAnswer, setLevel, level }: Screen
     const isCorrect = number === userAnswer;
 
   return (
-    <div className={`${screenStyles}`}>
+    <div className={`game__screen`}>
       <p className="text-center text-2xl">
         Number <br /> {number}
       </p>
@@ -199,10 +201,7 @@ const ResultScreen = ({ setScreen, number, userAnswer, setLevel, level }: Screen
           >
             Try again
           </Button>
-          <Button
-          >
-            Save result
-          </Button>
+          <Button>Save result</Button>
         </div>
       )}
     </div>

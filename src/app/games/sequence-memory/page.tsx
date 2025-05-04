@@ -4,7 +4,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Combine } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import s from "./sequence.module.css";
 import { generateSeq } from "./index";
 import Link from "next/link";
 
@@ -16,15 +15,13 @@ interface ScreenProps {
   setLevel?: (level: number) => void;
   level?: number;
 }
-const screenStyles =
-  "flex flex-col items-center justify-center py-10 gap-5 bg-[#85b5ed] h-[500px]";
 
 const SequenceMemoryPage = ({ className }: ScreenProps) => {
   const [screen, setScreen] = useState<ScreenType>("start");
   const [level, setLevel] = useState<number>(1);
 
   return (
-    <div className={`${className} ${screenStyles}`}>
+    <div className={`${className} game__screen`}>
       {(() => {
         switch (screen) {
           case "start":
@@ -209,7 +206,7 @@ const EndScreen = ({ setScreen, setLevel, level }: ScreenProps) => {
   if (setLevel === undefined) return null;
 
   return (
-    <div className={screenStyles}>
+    <div className={'game__screen'}>
       <p className="text-3xl font-bold text-center">
         Level <br /> {level}
       </p>

@@ -59,7 +59,7 @@ export const ReactionTimeScreen = ({ className }: Props) => {
 const StartScreen = ({ setScreen }: ScreenProps) => {
   return (
     <div
-      className={screenStyles}
+      className={"game__screen"}
       onClick={() => {
         setScreen("waiting");
       }}
@@ -103,7 +103,7 @@ const ClickScreen = ({
 
   return (
     <div
-      className={`${screenStyles} bg-fuchsia-300`}
+      className={`game__screen bg-fuchsia-300`}
       onClick={() => {
         const result = Date.now() - start;
         console.log(result);
@@ -119,7 +119,7 @@ const ClickScreen = ({
 const EndScreen = ({ setScreen, time }: ScreenProps) => {
   return (
     <div
-      className={screenStyles}
+      className='game__screen'
       onClick={() => {
         setScreen("waiting");
       }}
@@ -153,10 +153,10 @@ const EndScreen = ({ setScreen, time }: ScreenProps) => {
 const FaultScreen = ({ setScreen }: ScreenProps) => {
   return (
     <div
-      className={`${screenStyles} text-3xl`}
+      className={`game__screen text-3xl`}
       onClick={() => setScreen("waiting")}
     >
-      <Accessibility size={100}/>
+      <Accessibility size={100} />
       <p>You are stupid ass nigga</p>
       <p>Wait for PINK and then CLICK</p>
       <p>click to retry</p>

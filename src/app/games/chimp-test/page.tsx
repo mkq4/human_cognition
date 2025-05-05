@@ -34,7 +34,7 @@ const ChimpTestPage = ({ className }: Props) => {
                 />
               );
             case "end":
-              return <EndScreen setScreen={setScreen} />;
+              return <EndScreen setScreen={setScreen} level={level} setLevel={setLevel}/>;
             default:
               return null;
           }
@@ -128,6 +128,7 @@ const Block = ({
   };
 
   const handleClick = () => {
+    // console.log("handleClick")
     if (deletedBlocks.includes(label as number)) return;
 
     if (!setLevel) return null;
@@ -153,7 +154,7 @@ const Block = ({
       }
     } else {
       clear();
-      setLevel(1);
+      // setLevel(1);
       setScreen("end");
     }
   };
@@ -172,9 +173,15 @@ const Block = ({
   );
 };
 
-const EndScreen = ({ setScreen }: Props) => {
+const EndScreen = ({ setScreen, level, setLevel }: Props) => {
+
+  if (!setLevel) return null
+
   return (
     <div className="flex flex-col">
+      <p className="text-4xl mb-5 text-center">
+        Level <br /> {level}
+      </p>
       <p className="text-3xl mb-5">Monkey smarter then you nigga!</p>
       <div className="flex gap-3 justify-center">
         <Link
@@ -183,7 +190,14 @@ const EndScreen = ({ setScreen }: Props) => {
         >
           Back to home
         </Link>
-        <Button onClick={() => setScreen("game")}>Play again</Button>
+        <Button
+          onClick={() => {
+            setLevel(1);
+            setScreen("game");
+          }}
+        >
+          Play again
+        </Button>
         <Button>Save result</Button>
       </div>
     </div>

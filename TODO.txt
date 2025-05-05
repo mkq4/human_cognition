@@ -2,3 +2,6 @@
 - authorization (backend)
 - dashboard
 - user stats
+
+
+- providers in games

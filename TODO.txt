@@ -3,5 +3,7 @@
 - dashboard
 - user stats
 
+-- layout game context
+-- end screen buttons like component
 
 - providers in games

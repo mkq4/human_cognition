@@ -17,11 +17,11 @@ type ScreenProps = {
 };
 
 const backgroundColors = {
-  start: "[#85b5ed]",
-  waiting: "rose-400",
-  click: "fuchsia-300",
-  end: "[#85b5ed]",
-  fault: "[#85b5ed]",
+  start: "#85b5ed",
+  waiting: "#ff637e",
+  click: "#f3a8ff",
+  end: "#85b5ed",
+  fault: "#85b5ed",
 };
 
 const screenStyles =
@@ -33,7 +33,10 @@ export const ReactionTimeScreen = ({ className }: Props) => {
     console.log(`bg-${backgroundColors[screen]}`);
 
   return (
-    <div className={`${className} bg-${backgroundColors[screen]} h-[500px]`}>
+    <div
+      className={`${className} bg-${backgroundColors[screen]} h-[500px]`}
+      style={{ backgroundColor: backgroundColors[screen] }}
+    >
       <Container>
         {(() => {
           switch (screen) {
@@ -59,7 +62,7 @@ export const ReactionTimeScreen = ({ className }: Props) => {
 const StartScreen = ({ setScreen }: ScreenProps) => {
   return (
     <div
-      className={"game__screen"}
+      className={`${screenStyles} cursor-pointer`}
       onClick={() => {
         setScreen("waiting");
       }}
@@ -74,6 +77,7 @@ const StartScreen = ({ setScreen }: ScreenProps) => {
 const WaitingScreen = ({ setScreen }: ScreenProps) => {
   useEffect(() => {
     const delay = Math.floor(Math.random() * 5 + 3) * 1000;
+    // const delay = Math.floor(Math.random() * 5 + 3) * 1000000;
 
     const timeoutId = setTimeout(() => {
       console.log("timer starts");
@@ -84,7 +88,7 @@ const WaitingScreen = ({ setScreen }: ScreenProps) => {
   }, []);
 
   return (
-    <div className={`${screenStyles} ${backgroundColors['waiting']}`} onClick={() => setScreen("fault")}>
+    <div className={`${screenStyles}`} onClick={() => setScreen("fault")}>
       <Hand size={150} />
       <p className="text-3xl">Wait for the pink screen</p>
     </div>
@@ -103,7 +107,7 @@ const ClickScreen = ({
 
   return (
     <div
-      className={`game__screen bg-fuchsia-300`}
+      className={screenStyles}
       onClick={() => {
         const result = Date.now() - start;
         console.log(result);
@@ -153,7 +157,7 @@ const EndScreen = ({ setScreen, time }: ScreenProps) => {
 const FaultScreen = ({ setScreen }: ScreenProps) => {
   return (
     <div
-      className={`game__screen text-3xl`}
+      className={`text-3xl cursor-pointer`}
       onClick={() => setScreen("waiting")}
     >
       <Accessibility size={100} />

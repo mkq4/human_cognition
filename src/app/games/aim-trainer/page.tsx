@@ -6,6 +6,7 @@ import { Container } from "@/components/shared/container";
 import { Target } from "lucide-react";
 import React from "react";
 import Link from "next/link";
+import { EndScreenButtons } from '@/components/shared/end-screen-buttons';
 interface Props {
   className?: string;
   setScreen?: (screen: ScreenType) => void;
@@ -144,24 +145,9 @@ const EndScreen = ({ setScreen, startTimer }: Props) => {
 
   return (
     <GameScreen>
-      <p className="text-3xl">{result} seconds</p>
-      <div className="flex gap-3 justify-center">
-        <Link
-          className="text-xl bg-fuchsia-200 p-2 rounded-md cursor-pointer hover:bg-fuchsia-300"
-          href="/"
-        >
-          Back to home
-        </Link>
-        <Button
-          onClick={() => {
-            setScreen("main");
-          }}
-        >
-          Play again
-        </Button>
-        <Button>Save result</Button>
-      </div>
-    </GameScreen>
+      <p className="text-3xl cursor-pointer">{result} seconds</p>
+      <EndScreenButtons onClickRetryButton={() => setScreen('main')}/>
+    </GameScreen> 
   );
 };
 

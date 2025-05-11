@@ -1,4 +1,3 @@
-- Games cards (reaction time, sequence memory, aim trainer, number memory, verbal memo, chimp test, visual memory, typing)
 - authorization (backend)
 - dashboard
 - user stats
@@ -6,4 +5,4 @@
 -- layout game context
 -- end screen buttons like component
 
-- providers in games
+-- providers in games

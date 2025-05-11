@@ -6,6 +6,7 @@ import { Combine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { generateSeq } from "./index";
 import Link from "next/link";
+import { EndScreenButtons } from '@/components/shared/end-screen-buttons';
 
 type ScreenType = "start" | "game" | "end";
 
@@ -210,23 +211,10 @@ const EndScreen = ({ setScreen, setLevel, level }: ScreenProps) => {
       <p className="text-3xl font-bold text-center">
         Level <br /> {level}
       </p>
-      <div className="flex gap-3">
-        <Link
-          className={`text-xl bg-fuchsia-200 p-2 rounded-md cursor-pointer hover:bg-fuchsia-300`}
-          href="/"
-        >
-          To home
-        </Link>
-        <Button
-          onClick={() => {
-            setScreen("game");
-            setLevel(1);
-          }}
-        >
-          Retry
-        </Button>
-        <Button>Save result</Button>
-      </div>
+      <EndScreenButtons onClickRetryButton={() => {
+        setScreen("game");
+        setLevel(1);
+      }}/>
     </div>
   );
 };

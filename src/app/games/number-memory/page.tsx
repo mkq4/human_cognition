@@ -6,6 +6,7 @@ import { getDelay, getNumbers } from ".";
 import { LineTimer } from "@/components/ui/line-timer";
 import { Container } from "@/components/shared/container";
 import Link from 'next/link';
+import { EndScreenButtons } from '@/components/shared/end-screen-buttons';
 interface Props {
   className?: string;
 }
@@ -185,24 +186,10 @@ const ResultScreen = ({ setScreen, number, userAnswer, setLevel, level }: Screen
           Next level
         </Button>
       ) : (
-        <div className="flex gap-4">
-          <Link
-            className="text-xl bg-fuchsia-200 p-2 rounded-md cursor-pointer hover:bg-fuchsia-300"
-            href="/"
-          >
-            To home
-          </Link>
-
-          <Button
-            onClick={() => {
-              setLevel(1);
-              setScreen("number");
-            }}
-          >
-            Try again
-          </Button>
-          <Button>Save result</Button>
-        </div>
+        <EndScreenButtons onClickRetryButton={() => {
+          setLevel(1);
+          setScreen("number");
+        }}/>
       )}
     </div>
   );

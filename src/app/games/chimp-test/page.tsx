@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { generatePath } from "./index";
 import s from "./chimp.module.css";
 import Link from "next/link";
+import { EndScreenButtons } from "@/components/shared/end-screen-buttons";
 interface Props {
   className?: string;
   setScreen: (screen: ScreenType) => void;
@@ -34,7 +35,13 @@ const ChimpTestPage = ({ className }: Props) => {
                 />
               );
             case "end":
-              return <EndScreen setScreen={setScreen} level={level} setLevel={setLevel}/>;
+              return (
+                <EndScreen
+                  setScreen={setScreen}
+                  level={level}
+                  setLevel={setLevel}
+                />
+              );
             default:
               return null;
           }
@@ -174,8 +181,7 @@ const Block = ({
 };
 
 const EndScreen = ({ setScreen, level, setLevel }: Props) => {
-
-  if (!setLevel) return null
+  if (!setLevel) return null;
 
   return (
     <div className="flex flex-col">
@@ -183,7 +189,7 @@ const EndScreen = ({ setScreen, level, setLevel }: Props) => {
         Level <br /> {level}
       </p>
       <p className="text-3xl mb-5">Monkey smarter then you nigga!</p>
-      <div className="flex gap-3 justify-center">
+      {/* <div className="flex gap-3 justify-center">
         <Link
           className="text-xl bg-fuchsia-200 p-2 rounded-md cursor-pointer hover:bg-fuchsia-300"
           href="/"
@@ -199,7 +205,13 @@ const EndScreen = ({ setScreen, level, setLevel }: Props) => {
           Play again
         </Button>
         <Button>Save result</Button>
-      </div>
+      </div> */}
+      <EndScreenButtons
+        onClickRetryButton={() => {
+          setLevel(1);
+          setScreen("game");
+        }}
+      />
     </div>
   );
 };

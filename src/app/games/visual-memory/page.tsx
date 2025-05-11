@@ -7,7 +7,8 @@ import {
 } from "@/contexts/visualMemory.context";
 import { Eye } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { getBlocks } from ".";
+import { expandArea, getBlocks } from ".";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -64,44 +65,52 @@ const MainScreen = () => {
 
 const Area = () => {
   console.log("area");
-  const { blocksAmount, level, setLevel, area, setArea, setScreen } =
-    useContext(VisualMemoryContext); // количество блоков
+  const {
+    blocksAmount,
+    setBlocksAmount,
+    level,
+    setLevel,
+    area,
+    setArea,
+    setScreen,
+  } = useContext(VisualMemoryContext); // количество блоков
   const [seq, setSeq] = useState<number[]>([0]);
   const [previewSeq, setPreviewSeq] = useState<number[]>([0]);
-  const [areaSide, setAreaSide] = useState<number>()
   const blockSide = Math.floor(500 / blocksAmount - 20); // ширина блока
+  const [isDisable, setIsDisable] = useState<boolean>(true);
 
   const handleBlockClick = (blockId: number) => {
     if (seq.includes(blockId)) {
-      const nextPreviewSeq = [...previewSeq, blockId];
-      setPreviewSeq(nextPreviewSeq);
-      
-      if (seq.sort().toString() === nextPreviewSeq.sort().toString()) {
-        setSeq([])
-        setPreviewSeq([])
+      if (!previewSeq.includes(blockId)) {
+        const nextPreviewSeq = [...previewSeq, blockId];
+        setPreviewSeq(nextPreviewSeq);
 
-        //block area change 
-        // if ( area ** 2 / blocksAmount > area ** 2 / 2) {
-        //   setArea(area + 1)
-        // }
+        if (seq.sort().toString() === nextPreviewSeq.sort().toString()) {
+          setSeq([]);
+          setPreviewSeq([]);
 
-        setLevel(level + 1)
+          expandArea(level, blocksAmount, setBlocksAmount);
+
+          setLevel(level + 1);
+        }
       }
     } else {
-      setScreen('end')
+      setSeq([]);
+      setPreviewSeq([]);
+      setScreen("end");
     }
   };
 
   useEffect(() => {
-    const data = getBlocks(level, area);
+    const data = getBlocks(level, blocksAmount);
+    setIsDisable(true);
     setSeq(data);
     setPreviewSeq(data);
-    console.log(data)
-  }, [level]);
+    console.log(data);
 
-  useEffect(() => {
     setTimeout(() => {
       setPreviewSeq([]);
+      setIsDisable(false);
     }, 2000);
   }, [level]);
 
@@ -118,10 +127,24 @@ const Area = () => {
         return (
           <div
             style={{ width: blockSide, height: blockSide }}
-            className={`border-2 ${previewSeq.includes(i) ? "bg-white" : ""}`}
-            onClick={() => handleBlockClick(i)}
+            className={`border-2 ${
+              previewSeq.includes(i)
+                ? "bg-white cursor-not-allowed hover:bg-white"
+                : ""
+            }
+            ${
+              isDisable
+                ? "cursor-not-allowed"
+                : "cursor-pointer hover:bg-blue-300"
+            }
+            `}
+            onClick={() => {
+              if (!isDisable) {
+                handleBlockClick(i);
+              }
+            }}
           >
-            {i}
+            
           </div>
         );
       })}
@@ -130,7 +153,33 @@ const Area = () => {
 };
 
 const EndScreen = () => {
-  return <GameScreen>EndScreen</GameScreen>;
+  const { level, setScreen, setLevel } = useContext(VisualMemoryContext);
+  return (
+    <GameScreen>
+      <div className={"game__screen"}>
+        <p className="text-3xl font-bold text-center">
+          Level <br /> {level}
+        </p>
+        <div className="flex gap-3">
+          <Link
+            className={`text-xl bg-fuchsia-200 p-2 rounded-md cursor-pointer hover:bg-fuchsia-300`}
+            href="/"
+          >
+            To home
+          </Link>
+          <Button
+            onClick={() => {
+              setScreen("game");
+              setLevel(1);
+            }}
+          >
+            Retry
+          </Button>
+          <Button>Save result</Button>
+        </div>
+      </div>
+    </GameScreen>
+  );
 };
 
 export default VisualMemoryPage;

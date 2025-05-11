@@ -33,12 +33,6 @@ const cards: ICard[] = [
     link: "games/number-memory",
   },
   {
-    title: "varbal memory",
-    description: "Test your memory with this simple game.",
-    image: <BookUp size={50} />,
-    link: "games/varbal-memory",
-  },
-  {
     title: "chimp test",
     description: "Test your memory with this simple game.",
     image: <Banana size={50} />,

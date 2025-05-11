@@ -14,3 +14,13 @@ export function getBlocks(level: number, areaSide: number): number[] {
 
   return seq;
 }
+
+export function expandArea (
+  level: number, 
+  blocksAmount: number,
+  setBlocksAmount: (value: number) => void
+  ) {
+    if (level + 2 >= blocksAmount ** 2 / 2) {
+      setBlocksAmount(blocksAmount + 1)
+    }
+}
